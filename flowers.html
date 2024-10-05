@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunares - квіти</title>
+    <link rel="stylesheet" href="flowers.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <img src="imgs/logo.png" alt="" class="logoImg">
+            <p class="logoName">Lunares</p>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <ul class="navItems" id="navItems">
+                <li><a class="navLink" href="main.html">Про нас</a></li>
+                <li><a class="navLink">Букети</a></li>
+                <li><a class="navLink" href="order.html">Замовити</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div id="cards">
+        </div>
+        <a href="#" class="scroll-to-top" id="scrollToTop">
+            ↑
+        </a>   
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Про нас</h3>
+                <p>Ми пропонуємо стильні букети та квіткові композиції, створені з душею та любов'ю.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Контактна інформація</h3>
+                <p>Телефон: +38 (012) 345-67-89</p>
+                <p>Email: info@example.com</p>
+                <p>Адреса: Вулиця Квіткова, 123, Київ</p>
+            </div>
+            <div class="footer-section">
+                <h3>Соціальні мережі</h3>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Lunares. Усі права захищено.</p>
+        </div>
+    </footer>
+    <template id="cardTemplate">
+        <div class="card" data-selectedid="">
+            <img src="flowers/rosered.jpg" alt="Троянда" class="image">
+            <p class="name">Троянда</p>
+            <p class="price">50<span class="currency">грн</span></p>
+            <div class="colors">
+                <p>Виберіть колір:</p>
+            </div>
+            <div class="quantity">
+                <button class="minus-button">-</button>
+                <input disabled value="1"/>
+                <button class="plus-button">+</button>
+                <button class="fa-solid fa-basket-shopping addToCart"></button>
+            </div>
+            
+        </div>
+    </template>
+    <script src="flowers.js"></script>
+</body>
