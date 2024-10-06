@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunares - квіти</title>
-    <link rel="stylesheet" href="flowers.css">
+    <title>Lunares - головна сторінка</title>
+    <link rel="stylesheet" href="more.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -14,21 +14,19 @@
 <body>
     <header>
         <div class="navbar">
-            <img src="imgs/logo.png" alt="" class="logoImg">
+            <img src="imgs/logo.png" alt="Logo" class="logoImg">
             <p class="logoName">Lunares</p>
             <button class="menu-toggle" id="menu-toggle">☰</button>
             <ul class="navItems" id="navItems">
-                <li><a class="navLink" href="main.html">Про нас</a></li>
-                <li><a class="navLink" href="order.html">Замовити</a></li>
+                <li><a class="navLink" href="flowers.html">Квіти</a></li>
+                <li><a class="navLink">Букети</a></li>
             </ul>
         </div>
     </header>
     <main>
-        <div id="cards">
+        <p>Про квітку:</p>
+        <div id="info">
         </div>
-        <a href="#" class="scroll-to-top" id="scrollToTop">
-            ↑
-        </a>   
     </main>
     <footer>
         <div class="footer-content">
@@ -53,22 +51,16 @@
             <p>&copy; 2024 Lunares. Усі права захищено.</p>
         </div>
     </footer>
-    <template id="cardTemplate">
-        <div class="card" data-selectedid="">
-            <img src="flowers/rosered.jpg" alt="Троянда" class="image">
-            <p class="name">Троянда</p>
-            <p class="price">50<span class="currency">грн</span></p>
-            <div class="colors">
-                <p>Виберіть колір:</p>
-            </div>
-            <button class="more-button seeMore">Детальніше</button>
-            <div class="quantity">
-                <button class="minus-button">-</button>
-                <input disabled value="1"/>
-                <button class="plus-button">+</button>
-                <button class="fa-solid fa-basket-shopping addToCart"></button>
-            </div>
+    <template class="infoTemplate">
+        <div class="info" data-selectedid="">
+            <img src="" alt="flower image" class="image">
+            <p class="name"></p>
+            <p class="color"></p>
+            <p class="country"></p>
+            <p class="care"></p>
+            <p class="meaning"></p>
         </div>
-    </template>
-    <script src="flowers.js"></script>
+    </template>    
+    <script src="more.js"></script>
 </body>
+</html>
