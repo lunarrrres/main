@@ -46,3 +46,18 @@ scrollToTopBtn.addEventListener('click', (e) => {
         behavior: 'smooth'
     });
 });
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartCounter = document.getElementById("counter");
+    const counter = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCounter.textContent = counter;
+  }
+
+const gotoFlowers = document.getElementById('gotoButton');
+
+window.addEventListener('click', () => {
+    if (gotoFlowers) {
+        window.location.href = 'flowers.html';
+    }
+})

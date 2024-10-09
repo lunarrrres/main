@@ -45,3 +45,34 @@ if (totalPrice) {
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
 }
 
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Зупиняє звичайну відправку форми
+
+    // Отримуємо значення з форми
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var address = document.getElementById('address').value;
+    var message = document.getElementById('message').value;
+
+    // Відправка email через SMTP.js
+    Email.send({
+        SecureToken: "YOUR_SECURE_TOKEN", // Ваш токен безпеки (отриманий на smtpjs.com)
+        To: 'owner@example.com', // Ваш email
+        From: email, // Email, з якого буде надіслано
+        Subject: 'Нове замовлення від ' + name,
+        Body: `
+            Ім'я: ${name} <br>
+            Email: ${email} <br>
+            Телефон: ${phone} <br>
+            Адреса: ${address} <br>
+            Коментар: ${message}
+        `
+    }).then(function (response) {
+        alert("Форма успішно відправлена!");
+    }).catch(function (error) {
+        alert("Помилка при відправці форми. Спробуйте ще раз.");
+    });
+});
+
+
