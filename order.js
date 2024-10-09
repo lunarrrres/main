@@ -45,6 +45,8 @@ if (totalPrice) {
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
 }
 
+
+
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Зупиняє звичайну відправку форми
 
@@ -55,10 +57,23 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     var address = document.getElementById('address').value;
     var message = document.getElementById('message').value;
 
+    // Отримуємо дані з кошика
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Якщо кошик порожній
+    if (cart.length === 0) {
+        var cartItems = "Кошик порожній";
+    } else {
+        // Формуємо список товарів в кошику
+        cartItems = cart.map((item) => {
+            return `${item.title} - ${item.quantity}шт.*${item.price}грн - ${item.price * item.quantity}грн`;
+        }).join("<br>");
+    }
+
     // Відправка email через SMTP.js
     Email.send({
-        SecureToken: "YOUR_SECURE_TOKEN", // Ваш токен безпеки (отриманий на smtpjs.com)
-        To: 'owner@example.com', // Ваш email
+        SecureToken: "deffa907-63f0-4da7-b82f-85a0f0b71ce", // Ваш токен безпеки (отриманий на smtpjs.com)
+        To: 'vinyarsa@gmail.com', // Ваш email
         From: email, // Email, з якого буде надіслано
         Subject: 'Нове замовлення від ' + name,
         Body: `
@@ -66,7 +81,8 @@ document.getElementById('contact-form').addEventListener('submit', function(even
             Email: ${email} <br>
             Телефон: ${phone} <br>
             Адреса: ${address} <br>
-            Коментар: ${message}
+            Коментар: ${message} <br>
+            Замовлення: <br> ${cartItems}
         `
     }).then(function (response) {
         alert("Форма успішно відправлена!");
@@ -74,5 +90,3 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         alert("Помилка при відправці форми. Спробуйте ще раз.");
     });
 });
-
-
