@@ -45,7 +45,7 @@ if (totalPrice) {
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
 }
 
-document.getElementById('contact-form').addEventListener('submit', function(event) {
+document.getElementById('order-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Зупиняє звичайну відправку форми
 
     // Отримуємо значення з форми
@@ -68,23 +68,20 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         }).join("<br>");
     }
 
-    // Відправка email через SMTP.js
-    Email.send({
-        SecureToken: "deffa907-63f0-4da7-b82f-85a0f0b71ce", // Ваш токен безпеки (отриманий на smtpjs.com)
-        To: 'vinyarsa@gmail.com', // Ваш email
-        From: email, // Email, з якого буде надіслано
-        Subject: 'Нове замовлення від ' + name,
-        Body: `
-            Ім'я: ${name} <br>
-            Email: ${email} <br>
-            Телефон: ${phone} <br>
-            Адреса: ${address} <br>
-            Коментар: ${message} <br>
-            Замовлення: <br> ${cartItems}
-        `
-    }).then(function (response) {
-        alert("Форма успішно відправлена!");
-    }).catch(function (error) {
-        alert("Помилка при відправці форми. Спробуйте ще раз.");
-    });
+
 });
+
+function handleCredentialResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+  }
+  window.onload = function () {
+    google.accounts.id.initialize({
+      client_id: "676107649268-s9fklobk07lbrh5jbd2qti83j7v33gac.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("google-signin"),
+      { theme: "outline", size: "large" }  // customization attributes
+    );
+    google.accounts.id.prompt();
+}
