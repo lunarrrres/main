@@ -45,8 +45,6 @@ if (totalPrice) {
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
 }
 
-
-
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault(); // Зупиняє звичайну відправку форми
 
