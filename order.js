@@ -1,38 +1,35 @@
-const menuToggle = document.getElementById('menu-toggle');
-const navItems = document.getElementById('navItems');
+const menuToggle = document.getElementById("menu-toggle");
+const navItems = document.getElementById("navItems");
 
-menuToggle.addEventListener('click', () => {
-    navItems.classList.toggle('show');
+menuToggle.addEventListener("click", () => {
+    navItems.classList.toggle("show");
 });
 
-console.log(JSON.parse(localStorage.getItem("cart")))
+console.log(JSON.parse(localStorage.getItem("cart")));
 
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const orderItems = document.getElementById("order-items");
 
 cartItems = cart.map((item) => {
     return `<li>${item.title} - ${item.quantity}шт.*${item.price}грн - ${item.price * item.quantity}грн .</li><br>`;
-})
+});
 orderItems.innerHTML = cartItems.join("");
 
-document.getElementById("reset-cart").addEventListener('click', () => {
+document.getElementById("reset-cart").addEventListener("click", () => {
     localStorage.removeItem("cart");
-    document.getElementById("order-items").innerHTML = "<h4>Замовлення пусте</h4>"
+    document.getElementById("order-items").innerHTML = "<h4>Замовлення пусте</h4>";
     const requestOrderButton = document.getElementById("request-order");
     requestOrderButton.setAttribute("disabled", true);
-    requestOrderButton.classList.toggle('disabled');
+    requestOrderButton.classList.toggle("disabled");
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
-})
+});
 
 if (cart.length === 0) {
     document.getElementById("order-items").innerHTML = "<h4>Замовлення пусте</h4>";
     const requestOrderButton = document.getElementById("request-order");
     requestOrderButton.setAttribute("disabled", true);
-    requestOrderButton.classList.toggle('disabled')
+    requestOrderButton.classList.toggle("disabled");
 }
-document.getElementById("request-order").addEventListener('click', () => {
-    
-})
 
 // Отримання загальної вартості з Local Storage
 const totalPrice = localStorage.getItem("totalPrice");
@@ -41,34 +38,32 @@ const totalPrice = localStorage.getItem("totalPrice");
 if (totalPrice) {
     // Відображення загальної вартості на сторінці
     document.getElementById("totalPriceDisplay").textContent = `Загальна вартість: ${totalPrice} грн`;
-} else{
+} else {
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
 }
 
-document.getElementById('order-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Зупиняє звичайну відправку форми
+document.getElementById("order-form").addEventListener("submit", function (event) {
+event.preventDefault(); // Зупиняє звичайну відправку форми
 
     // Отримуємо значення з форми
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-    var phone = document.getElementById('phone').value;
-    var address = document.getElementById('address').value;
-    var message = document.getElementById('message').value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const message = document.getElementById("message").value;
 
     // Отримуємо дані з кошика
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     // Якщо кошик порожній
-    if (cart.length === 0) {
-        var cartItems = "Кошик порожній";
-    } else {
-        // Формуємо список товарів в кошику
-        cartItems = cart.map((item) => {
-            return `${item.title} - ${item.quantity}шт.*${item.price}грн - ${item.price * item.quantity}грн`;
-        }).join("<br>");
-    }
-
-
+    const cartItems =
+        cart.length === 0
+            ? "Кошик порожній"
+            : cart
+                  .map((item) => {
+                      return `${item.title} - ${item.quantity}шт.*${item.price}грн - ${item.price * item.quantity}грн`;
+                  })
+                  .join("<br>");
 });
 
 function handleCredentialResponse(response) {
