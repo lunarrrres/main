@@ -188,12 +188,16 @@ window.flowers = flowers;
 const getFlower = (id, flowers) => {
   const flower = flowers.find(
     (flower) =>
-      flower.id === id || flower.variants.some((variant) => variant.id === id)
+      flower.id === id || flower.variants?.some((variant) => variant.id === id)
   );
 
-  return flower && flowers.some((f) => f.id === id)
-    ? { ...flower, ...flower.variants[0] }
-    : { ...flower, ...flower.variants.find((v) => v.id === id) };
+  if (flower.variants) {
+    return flower && flowers.some((f) => f.id === id)
+      ? { ...flower, ...flower.variants[0] }
+      : { ...flower, ...flower.variants.find((v) => v.id === id) };
+  } else {
+    return flower;
+  }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -201,6 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const flowerId = parseInt(params.get("id"));
 
   const flower = getFlower(flowerId, flowers);
+  console.log(flower);
 
   const infoContainer = document.getElementById("info");
   if (flower) {
