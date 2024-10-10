@@ -1,9 +1,11 @@
-const menuToggle = document.getElementById("menu-toggle");
-const navItems = document.getElementById("navItems");
+const goBack = document.getElementById('backButton');
 
-menuToggle.addEventListener("click", () => {
-  navItems.classList.toggle("show");
-});
+window.addEventListener('click', () => {
+    if (goBack) {
+        window.location.href = 'flowers.html';
+    }
+})
+
 const flowers = [
   {
     id: 1,
@@ -43,7 +45,7 @@ const flowers = [
     variants: [
       {
         id: 4,
-        color: "red",
+        color: "червоний",
         image: "flowers/tulipred.jpg",
         country: "Україна",
         meaning:
@@ -51,7 +53,7 @@ const flowers = [
       },
       {
         id: 5,
-        color: "pink",
+        color: "рожевий",
         image: "flowers/tulippin.jpg",
         country: "Нідерланди",
         meaning:
@@ -59,7 +61,7 @@ const flowers = [
       },
       {
         id: 6,
-        color: "white",
+        color: "білий",
         image: "flowers/tulipwhi.jpg",
         country: "Нідерланди",
         meaning:
@@ -75,7 +77,7 @@ const flowers = [
     variants: [
       {
         id: 7,
-        color: "blue",
+        color: "блакитний",
         image: "flowers/hydrablu.jpg",
         country: "Еквадор",
         meaning:
@@ -83,7 +85,7 @@ const flowers = [
       },
       {
         id: 8,
-        color: "pink",
+        color: "рожевий",
         image: "flowers/hydrapin.jpg",
         country: "Колумбія",
         meaning:
@@ -91,7 +93,7 @@ const flowers = [
       },
       {
         id: 9,
-        color: "white",
+        color: "білий",
         image: "flowers/hydrawhi.jpg",
         country: "Україна",
         meaning:
@@ -115,7 +117,7 @@ const flowers = [
     variants: [
       {
         id: 11,
-        color: "pink",
+        color: "рожевий",
         image: "flowers/peonypin.jpg",
         country: "Кенія",
         meaning:
@@ -123,7 +125,7 @@ const flowers = [
       },
       {
         id: 12,
-        color: "white",
+        color: "білий",
         image: "flowers/peonywhi.jpg",
         country: "Нідерланди",
         meaning:
@@ -131,7 +133,7 @@ const flowers = [
       },
       {
         id: 13,
-        color: "violet",
+        color: "фіолетовий",
         image: "flowers/peonyvio.jpg",
         country: "Кенія",
         meaning:
@@ -146,7 +148,7 @@ const flowers = [
     variants: [
       {
         id: 14,
-        color: "pink",
+        color: "рожевий",
         image: "flowers/dahliapin.jpg",
         country: "Еквадор",
         meaning:
@@ -154,7 +156,7 @@ const flowers = [
       },
       {
         id: 15,
-        color: "white",
+        color: "білий",
         image: "flowers/dahliawhi.jpg",
         country: "Еквадор",
         meaning:
@@ -162,7 +164,7 @@ const flowers = [
       },
       {
         id: 16,
-        color: "red",
+        color: "червоний",
         image: "flowers/dahliared.jpg",
         country: "Україна",
         meaning:
@@ -221,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    nameElement.textContent = `Квітка ${flower.title}`;
+    nameElement.textContent = `${flower.title}`;
     colorElement.textContent = `Колір: ${
       flower.color ?? "Інформація відсутня"
     }`;
@@ -239,3 +241,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+

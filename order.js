@@ -43,7 +43,7 @@ if (totalPrice) {
 }
 
 document.getElementById("order-form").addEventListener("submit", function (event) {
-    event.preventDefault(); // Зупиняє звичайну відправку форми
+event.preventDefault(); // Зупиняє звичайну відправку форми
 
     // Отримуємо значення з форми
     const name = document.getElementById("name").value;
