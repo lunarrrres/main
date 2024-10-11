@@ -60,9 +60,14 @@
                     інформацію для обробки.
                 </p>
             </div>
-            <div id="order-form">
+            <div id="order-form-container">
                 <h1>Замовлення</h1>
-                <form method="post" enctype="text/plain">
+                <p>Авторизуйтеся, щоб зробити замовлення.</p>
+                <div id="google-signin">
+                </div>
+                <button class="hidden" id="sign-out">Вийти</button>
+                
+                <form id="order-form" method="post" enctype="text/plain">
                     <label for="name">Ім'я:</label>
                     <input type="text" id="name" name="name" required />
                     <label for="email">Email:</label>
@@ -73,16 +78,9 @@
                     <input type="text" id="address" name="address" required />
                     <label for="message">Коментар:</label>
                     <textarea id="message" name="message" rows="5"></textarea>
-                    <button type="submit" id="request-order">Відправити</button>
+                    <button type="submit" id="request-order" disabled>Відправити</button>
                 </form>
-                <div id="google-signin">
-                </div>
-                <div class="google-container">
-                    <img src="" alt="profile" class="img">
-                    <div class="name"></div>
-                    <div class="email"></div>
-                    <button class="fa-solid fa-trash" id="sign-out"></button>
-                </div>
+                
             </div>
             <div id="order-container">
                 <div id="order-list">
@@ -127,14 +125,10 @@
         </div>
     </footer>
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+        
       
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
           apiKey: "AIzaSyDMUBvWKRfL-XjsxjcWlzHToINLD0Hrbks",
           authDomain: "lunares-flowers-91fc2.firebaseapp.com",
@@ -145,7 +139,6 @@
           measurementId: "G-N0BVE3VEYC"
         };
       
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         window.app = app;
