@@ -72,14 +72,7 @@ function handleCredentialResponse(response) {
     console.log("Full Name: " + payload.name);
     console.log("Encoded JWT ID token: " + response.credential);
 
-    document.getElementById("name").value = payload.name;
-    document.getElementById("email").value = payload.email;
-    document.getElementById("phone").value = payload.phone_number || "";
-    document.getElementById("address").value = payload.address || "";
-
-    document.getElementById("request-order").disabled = false;
-    document.getElementById("request-order").classList.toggle("disabled");
-
+    updateForm(payload);
     document.getElementById("google-signin").classList.toggle("hidden");
     document.getElementById("sign-out").classList.toggle("hidden");
     document.getElementById("sign-out").addEventListener("click", signOut);
@@ -96,10 +89,19 @@ window.onload = function () {
     google.accounts.id.prompt();
 };
 
+function updateForm({ name, email, phone_number = "", address = "" }) {
+    document.getElementById("name").value = name;
+    document.getElementById("email").value = email;
+    document.getElementById("phone").value = phone_number;
+    document.getElementById("address").value = address;
+    document.getElementById("request-order").disabled = false;
+    document.getElementById("request-order").classList.toggle("disabled");
+}
+
 function decodeJwtResponse(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
         atob(base64)
             .split("")
             .map(function (c) {
