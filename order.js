@@ -42,8 +42,8 @@ if (totalPrice) {
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
 }
 
-document.getElementById("order-form").addEventListener("submit", function (event) {
-event.preventDefault(); // Зупиняє звичайну відправку форми
+document.getElementById("order-form-container").addEventListener("submit", function (event) {
+    event.preventDefault(); // Зупиняє звичайну відправку форми
 
     // Отримуємо значення з форми
     const name = document.getElementById("name").value;
@@ -67,16 +67,54 @@ event.preventDefault(); // Зупиняє звичайну відправку ф
 });
 
 function handleCredentialResponse(response) {
+    const payload = decodeJwtResponse(response.credential);
+    console.log("ID: " + payload.sub);
+    console.log("Full Name: " + payload.name);
     console.log("Encoded JWT ID token: " + response.credential);
-  }
-  window.onload = function () {
+
+    updateForm(payload);
+    document.getElementById("google-signin").classList.toggle("hidden");
+    document.getElementById("sign-out").classList.toggle("hidden");
+    document.getElementById("sign-out").addEventListener("click", signOut);
+}
+window.onload = function () {
     google.accounts.id.initialize({
-      client_id: "676107649268-s9fklobk07lbrh5jbd2qti83j7v33gac.apps.googleusercontent.com",
-      callback: handleCredentialResponse
+        client_id: "676107649268-s9fklobk07lbrh5jbd2qti83j7v33gac.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
     });
     google.accounts.id.renderButton(
-      document.getElementById("google-signin"),
-      { theme: "outline", size: "large" }  // customization attributes
+        document.getElementById("google-signin"),
+        { theme: "outline", size: "large" }, // customization attributes
     );
     google.accounts.id.prompt();
+};
+
+function updateForm({ name, email, phone_number = "", address = "" }) {
+    document.getElementById("name").value = name;
+    document.getElementById("email").value = email;
+    document.getElementById("phone").value = phone_number;
+    document.getElementById("address").value = address;
+    document.getElementById("request-order").disabled = false;
+    document.getElementById("request-order").classList.toggle("disabled");
+}
+
+function decodeJwtResponse(token) {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+        atob(base64)
+            .split("")
+            .map(function (c) {
+                return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join(""),
+    );
+    return JSON.parse(jsonPayload);
+}
+
+function signOut() {
+    google.accounts.id.disableAutoSelect();
+    document.getElementById("order-form").reset();
+    // do anything on logout
+    location.reload();
 }
