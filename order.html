@@ -78,6 +78,7 @@
                     <input type="text" id="address" name="address" required />
                     <label for="message">Коментар:</label>
                     <textarea id="message" name="message" rows="5"></textarea>
+                    <input type="text" id="uid" name="uid" hidden />
                     <button type="submit" id="request-order" disabled>Відправити</button>
                 </form>
                 
@@ -124,26 +125,8 @@
             <p>&copy; 2024 Lunares. Усі права захищено.</p>
         </div>
     </footer>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-analytics.js";
-        
-      
-        const firebaseConfig = {
-          apiKey: "AIzaSyDMUBvWKRfL-XjsxjcWlzHToINLD0Hrbks",
-          authDomain: "lunares-flowers-91fc2.firebaseapp.com",
-          projectId: "lunares-flowers-91fc2",
-          storageBucket: "lunares-flowers-91fc2.appspot.com",
-          messagingSenderId: "132221542893",
-          appId: "1:132221542893:web:0377549153482bb1ee07e4",
-          measurementId: "G-N0BVE3VEYC"
-        };
-      
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        window.app = app;
-        window.analytics = analytics;
-      </script>
+    <div id="notification" class="hidden"></div>
+    <script type="module" src="order-module.js"></script>
     <script src="https://accounts.google.com/gsi/client" async></script>
     <script src="order.js"></script>
 
