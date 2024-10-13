@@ -42,37 +42,13 @@ if (totalPrice) {
     document.getElementById("totalPriceDisplay").textContent = "Кошик порожній";
 }
 
-document.getElementById("order-form-container").addEventListener("submit", function (event) {
-    event.preventDefault(); // Зупиняє звичайну відправку форми
-
-    // Отримуємо значення з форми
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const address = document.getElementById("address").value;
-    const message = document.getElementById("message").value;
-
-    // Отримуємо дані з кошика
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    // Якщо кошик порожній
-    const cartItems =
-        cart.length === 0
-            ? "Кошик порожній"
-            : cart
-                  .map((item) => {
-                      return `${item.title} - ${item.quantity}шт.*${item.price}грн - ${item.price * item.quantity}грн`;
-                  })
-                  .join("<br>");
-});
-
 function handleCredentialResponse(response) {
     const payload = decodeJwtResponse(response.credential);
     console.log("ID: " + payload.sub);
     console.log("Full Name: " + payload.name);
     console.log("Encoded JWT ID token: " + response.credential);
 
-    updateForm(payload);
+    updateForm(payload, response.credential);
     document.getElementById("google-signin").classList.toggle("hidden");
     document.getElementById("sign-out").classList.toggle("hidden");
     document.getElementById("sign-out").addEventListener("click", signOut);
@@ -89,16 +65,18 @@ window.onload = function () {
     google.accounts.id.prompt();
 };
 
-function updateForm({ name, email, phone_number = "", address = "" }) {
+function updateForm({ name, email, phone_number = "", address = "" }, token) {
     document.getElementById("name").value = name;
     document.getElementById("email").value = email;
     document.getElementById("phone").value = phone_number;
     document.getElementById("address").value = address;
+    document.getElementById("user-token").value = token;
     document.getElementById("request-order").disabled = false;
     document.getElementById("request-order").classList.toggle("disabled");
 }
 
 function decodeJwtResponse(token) {
+    console.log("Decode JWT ID token: " + token);
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
