@@ -78,7 +78,7 @@
                     <input type="text" id="address" name="address" required />
                     <label for="message">Коментар:</label>
                     <textarea id="message" name="message" rows="5"></textarea>
-                    <input type="text" id="user-token" name="user-token" hidden />
+                    <input type="text" id="uid" name="uid" hidden />
                     <button type="submit" id="request-order" disabled>Відправити</button>
                 </form>
                 
@@ -125,6 +125,7 @@
             <p>&copy; 2024 Lunares. Усі права захищено.</p>
         </div>
     </footer>
+    <div id="notification" class="hidden"></div>
     <script type="module" src="order-module.js"></script>
     <script src="https://accounts.google.com/gsi/client" async></script>
     <script src="order.js"></script>
