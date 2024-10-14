@@ -21,6 +21,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth();
 
+// Google sign in button
 window.onload = function () {
     google.accounts.id.initialize({
         client_id: "132221542893-tbaplfcb3a2sm1s1p71s71umrimn0c4n.apps.googleusercontent.com",
@@ -30,9 +31,11 @@ window.onload = function () {
         document.getElementById("google-signin"),
         { theme: "outline", size: "large" }, // customization attributes
     );
+    // Show Google sign in suggestion
     google.accounts.id.prompt();
 };
 
+// Google sign in with Firebase
 function handleCredentialResponse(response) {
     // Build Firebase credential with the Google ID token.
     const idToken = response.credential;
@@ -56,58 +59,50 @@ function handleCredentialResponse(response) {
             const email = error.email;
             // The credential that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
+
+            console.log(errorCode, errorMessage, email, credential);
         });
 }
 
 document.getElementById("order-form").addEventListener("submit", function (event) {
-    event.preventDefault(); // Зупиняє звичайну відправку форми
+    event.preventDefault(); // Prevent the form from submitting normally
 
-    // Отримуємо значення з форми
-    const formData = getData(event.target);
-    const { name, email, phone, address, message, uid } = formData;
+    // Getting the data from the form
+    const { name, email, phone, address, message, uid } = getData(event.target);
 
-    // Отримуємо дані з кошика
+    // Get the cart from local storage
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if (cart.length === 0) {
         showNotification("Кошик порожній");
         return;
     }
-    // Якщо кошик порожній
-    const cartItems = cart
-        .map((item) => {
-            return `${item.title} - ${item.quantity}шт.*${item.price}грн - ${item.price * item.quantity}грн`;
-        })
-        .join("<br>");
 
-    // Створюємо запис в базі даних
+    //  Adding the data to the database
     const record = {
-        [new Date()]: {
-            name: name,
-            email: email,
-            phone: phone,
-            address: address,
-            message: message,
-            cart: cartItems,
-        },
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+        message: message,
+        cart,
     };
 
-    // Записуємо дані в базу даних
-    set(ref(db, "orders/" + uid), record)
+    set(ref(db, `orders/${uid}/${new Date()}`), record)
         .then(() => {
-            // Відображаємо повідомлення про успішне замовлення
+            // Show success notification message
             showNotification("Замовлення успішно збережено!");
-            // Очищаємо кошик
+            // Clear the cart from local storage
             localStorage.removeItem("cart");
             localStorage.removeItem("totalPrice");
         })
         .catch((error) => {
-            // Відображаємо повідомлення про помилку
+            // Show error notification message
             showNotificationErrorOrder(error.message);
         });
 });
 
+// Get the data from the form
 function getData(form) {
     var formData = new FormData(form);
     const objFormData = Object.fromEntries(formData);
