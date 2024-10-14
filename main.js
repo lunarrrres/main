@@ -56,8 +56,6 @@ function updateCartCount() {
 
 const gotoFlowers = document.getElementById('gotoButton');
 
-window.addEventListener('click', () => {
-    if (gotoFlowers) {
+gotoFlowers.addEventListener('click', () => {
         window.location.href = 'flowers.html';
-    }
 })

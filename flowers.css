@@ -287,3 +287,61 @@ footer {
     }
   }
 }
+
+#timer {
+  font-family: 'Arial', sans-serif;
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+}
+
+#timer div {
+  margin: 10px;
+  display: inline-block;
+}
+
+#timer span {
+  font-weight: bold;
+  font-size: 30px;
+  color: #ff5733;
+}
+
+.timer {
+  color: rgb(254, 250, 224);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  & p{
+    color: rgb(40, 54, 24);
+    font-size: 48px;
+    font-weight: 900;
+  }
+}
+
+.timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-number {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.timer-label {
+  font-size: 16px;
+  color: rgb(188, 108, 37);
+}
+
+.timer-section .timer-number {
+  background-color: rgb(96, 108, 56);
+  padding: 10px;
+  border-radius: 5px;
+}

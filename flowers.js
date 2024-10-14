@@ -240,3 +240,33 @@ flowers.forEach((flower) => {
 
   cardContainer.append(card);
 });
+
+function startCountdown() {
+  const endDate = new Date('2024-10-19T00:00:00').getTime();
+
+  const timerInterval = setInterval(function() {
+      const now = new Date().getTime();
+      const timeRemaining = endDate - now;
+
+      // Обчислюємо кількість днів, годин, хвилин і секунд
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+      // Виводимо результат
+      document.getElementById('days').innerText = days;
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+
+      // Якщо таймер досягне 0, зупиняємо його
+      if (timeRemaining < 0) {
+          clearInterval(timerInterval);
+          document.getElementById('timer').innerHTML = "Час вийшов!";
+      }
+  }, 1000);
+}
+
+// Запускаємо таймер
+startCountdown();
