@@ -206,8 +206,20 @@ main {
         & > * {
             width: 100%;
         }
-    }
 
+        & input {
+            border: 1px solid rgb(188, 108, 37);
+            border-radius: 5px;
+            font-size: 18px;
+            padding: 10px 10px;
+        }
+        & textarea {
+            border: 1px solid rgb(188, 108, 37);
+            border-radius: 5px;
+            font-size: 18px;
+            padding: 10px 10px;
+        }
+    }
     & label {
         font-weight: bold;
     }
@@ -231,13 +243,24 @@ main {
             color: rgb(254, 250, 224);
             transform: none;
         }
+        &:hover {
+            color: rgb(254, 250, 224);
+            background-color: rgb(188, 108, 37);
+            transform: scale(1.1);
+        }
     }
 
-    & button:hover {
-        color: rgb(254, 250, 224);
-        background-color: rgb(188, 108, 37);
-        transform: scale(1.1);
-    }
+   
+}
+#sign-out {
+    color: rgb(254, 250, 224);
+    background-color: rgb(188, 108, 37);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px 5px;
+    margin: 10px;
+    cursor: pointer;
 }
 
 #notification {
@@ -259,7 +282,16 @@ main {
         border-radius: 5px;
         margin-top: 10px;
         text-align: center;
+        & a{
+            color: rgb(254, 250, 224);
+            background-color: rgb(221, 161, 94);
+            cursor: pointer;
+            text-decoration: none;
+            padding: 3px 5px;
+        }
     }
+
+
 
     &.hidden {
         display: none;
